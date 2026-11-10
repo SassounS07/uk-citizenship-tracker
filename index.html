@@ -1,0 +1,1033 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Road to British Citizenship</title>
+<meta name="description" content="Track your progress from UK visa to settlement (ILR) and British citizenship. Your details stay on your device.">
+<meta name="theme-color" content="#f6f7f9" id="themeColor">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Citizenship">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<script>
+  // Apply the saved theme before the page paints, so there's no flash.
+  (function () {
+    try {
+      var t = localStorage.getItem('road-to-citizenship.theme');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) {}
+  })();
+</script>
+<style>
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-2: #f3f5f8;
+  --border: #e4e7ec;
+  --ink: #101828;
+  --ink-2: #475467;
+  --ink-3: #8a94a6;
+  --primary: #1d3c8f;
+  --primary-hover: #17317a;
+  --primary-soft: #eaf0fc;
+  --on-primary: #ffffff;
+  --red: #c8102e;
+  --red-soft: #fdecee;
+  --green: #12805c;
+  --green-soft: #e6f6ef;
+  --amber: #a15c07;
+  --amber-soft: #fef4e2;
+  --track: #e9edf3;
+  --phase-1: #dfe7f8;
+  --phase-2: #f9e3e7;
+  --focus: #2f6fed;
+  --shadow: 0 1px 2px rgba(16, 24, 40, .04), 0 1px 3px rgba(16, 24, 40, .06);
+  --shadow-lg: 0 12px 32px -12px rgba(16, 24, 40, .18);
+  --radius: 16px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #000000;
+    --surface: #111111;
+    --surface-2: #1a1a1a;
+    --border: #2a2a2a;
+    --ink: #f2f2f2;
+    --ink-2: #a8a8a8;
+    --ink-3: #737373;
+    --primary: #7c9cff;
+    --primary-hover: #97b1ff;
+    --primary-soft: #1a1d26;
+    --on-primary: #000000;
+    --red: #ff6b7f;
+    --red-soft: #2a1416;
+    --green: #4ad295;
+    --green-soft: #11241a;
+    --amber: #f3b54a;
+    --amber-soft: #2a2010;
+    --track: #222222;
+    --phase-1: #1d2029;
+    --phase-2: #2a1d21;
+    --focus: #8fb0ff;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3);
+    --shadow-lg: 0 12px 32px -12px rgba(0, 0, 0, .6);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #000000;
+  --surface: #111111;
+  --surface-2: #1a1a1a;
+  --border: #2a2a2a;
+  --ink: #f2f2f2;
+  --ink-2: #a8a8a8;
+  --ink-3: #737373;
+  --primary: #7c9cff;
+  --primary-hover: #97b1ff;
+  --primary-soft: #1a1d26;
+  --on-primary: #000000;
+  --red: #ff6b7f;
+  --red-soft: #2a1416;
+  --green: #4ad295;
+  --green-soft: #11241a;
+  --amber: #f3b54a;
+  --amber-soft: #2a2010;
+  --track: #222222;
+  --phase-1: #1d2029;
+  --phase-2: #2a1d21;
+  --focus: #8fb0ff;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .3);
+  --shadow-lg: 0 12px 32px -12px rgba(0, 0, 0, .6);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 15px/1.55 Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-feature-settings: "cv11", "ss01";
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { margin: 0; line-height: 1.25; letter-spacing: -.01em; }
+button, input, select { font: inherit; color: inherit; }
+.num { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+[hidden] { display: none !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+
+/* ---------- Top bar ---------- */
+.topbar {
+  position: sticky; top: 0; z-index: 20;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: saturate(160%) blur(12px); -webkit-backdrop-filter: saturate(160%) blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding-top: env(safe-area-inset-top);
+}
+.topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 60px; }
+.brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.flag { width: 34px; height: 17px; border-radius: 3px; flex: none; box-shadow: 0 0 0 1px rgba(16,24,40,.12); display: block; }
+.brand-name .short { display: none; }
+@media (max-width: 420px) { .brand-name .long { display: none; } .brand-name .short { display: inline; } }
+.brand-name { font-weight: 600; font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.theme-toggle { display: inline-flex; padding: 3px; gap: 2px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--border); flex: none; }
+.theme-toggle button {
+  width: 32px; height: 28px; border: 0; border-radius: 7px; background: transparent; color: var(--ink-3);
+  display: grid; place-items: center; cursor: pointer; padding: 0;
+}
+.theme-toggle button:hover { color: var(--ink); }
+.theme-toggle button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: var(--shadow); }
+.theme-toggle svg { width: 16px; height: 16px; }
+
+/* ---------- Cards ---------- */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 22px; min-width: 0; }
+.card-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.card h2 { font-size: 17px; font-weight: 600; }
+.card .sub { color: var(--ink-2); margin: 4px 0 0; font-size: 14px; }
+.stack > * + * { margin-top: 16px; }
+
+/* ---------- Hero ---------- */
+.hero { padding-top: 28px; }
+.hero-card { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); align-items: center; padding: 26px; }
+@media (min-width: 720px) { .hero-card { grid-template-columns: minmax(0, 1fr) auto; padding: 32px; } }
+.kicker { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--ink-2); background: var(--surface-2); border: 1px solid var(--border); border-radius: 99px; padding: 4px 10px 4px 6px; }
+.kicker .flag { width: 22px; height: 11px; border-radius: 2px; }
+.hero h1 { font-size: clamp(26px, 5.4vw, 38px); font-weight: 700; margin-top: 14px; letter-spacing: -.025em; }
+.hero h1 .accent { color: var(--primary); }
+.hero .lead { color: var(--ink-2); font-size: 16px; margin: 10px 0 0; max-width: 46ch; }
+.hero .lead b { color: var(--ink); font-weight: 600; }
+.save-status { margin-top: 16px; font-size: 13px; color: var(--ink-3); display: inline-flex; align-items: center; gap: 7px; }
+.save-status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+.save-status[data-kind="example"]::before { background: var(--amber); }
+.save-status[data-kind="error"]::before { background: var(--red); }
+
+.ring { position: relative; width: 168px; height: 168px; justify-self: center; }
+.ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.ring .bg { stroke: var(--track); }
+.ring .fg { stroke: var(--primary); transition: stroke-dashoffset .9s cubic-bezier(.2,.8,.2,1); }
+.ring-label { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; }
+.ring-label strong { font-size: 40px; font-weight: 700; letter-spacing: -.03em; line-height: 1; }
+.ring-label strong small { font-size: 18px; font-weight: 600; color: var(--ink-2); margin-left: 1px; }
+.ring-label span { font-size: 12px; color: var(--ink-3); margin-top: 6px; font-weight: 500; }
+
+/* ---------- Stats ---------- */
+.stats { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 16px; }
+@media (min-width: 720px) { .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.stat { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; box-shadow: var(--shadow); min-width: 0; }
+.stat.feature { grid-column: 1 / -1; }
+@media (min-width: 720px) { .stat.feature { grid-column: auto; } }
+.stat-label { font-size: 13px; color: var(--ink-2); font-weight: 500; display: flex; align-items: center; gap: 7px; }
+.stat-label i { width: 8px; height: 8px; border-radius: 50%; display: block; flex: none; }
+.stat-value { font-size: 30px; font-weight: 700; letter-spacing: -.03em; margin-top: 6px; line-height: 1.1; }
+.stat-value small { font-size: 14px; font-weight: 500; color: var(--ink-3); letter-spacing: 0; margin-left: 4px; }
+.stat-foot { font-size: 13px; color: var(--ink-3); margin-top: 4px; }
+.stat.done .stat-value { color: var(--green); font-size: 22px; padding: 4px 0 2px; }
+
+/* ---------- Interactive timeline ---------- */
+.chart-card { margin-top: 16px; }
+.reset-btn { font-size: 13px; }
+.chart { position: relative; margin: 22px 10px 0; user-select: none; -webkit-user-select: none; }
+.chart-area { position: relative; padding: 34px 0 6px; cursor: crosshair; touch-action: pan-y; outline: none; border-radius: 10px; }
+.chart-area:focus-visible { box-shadow: 0 0 0 2px var(--focus); }
+.track { position: relative; height: 12px; border-radius: 99px; background: var(--track); overflow: hidden; }
+.phase { position: absolute; top: 0; bottom: 0; }
+.phase.p1 { background: var(--phase-1); left: 0; }
+.phase.p2 { background: var(--phase-2); right: 0; }
+.fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 99px; background: linear-gradient(90deg, var(--primary), color-mix(in srgb, var(--primary) 55%, var(--red))); transition: width .9s cubic-bezier(.2,.8,.2,1); }
+.tick { position: absolute; top: 0; bottom: 0; width: 1px; background: color-mix(in srgb, var(--ink-3) 30%, transparent); }
+
+.stop {
+  position: absolute; top: calc(34px + 6px); width: 30px; height: 30px; margin: -15px 0 0 -15px; padding: 0;
+  border: 0; background: transparent; cursor: pointer; display: grid; place-items: center; z-index: 3; border-radius: 50%;
+}
+.stop::before { content: ""; width: 18px; height: 18px; border-radius: 50%; background: var(--surface); border: 3px solid var(--ink-3); transition: transform .15s ease; box-sizing: border-box; }
+.stop.reached::before { background: var(--primary); border-color: var(--primary); }
+.stop.final::before { border-color: var(--red); }
+.stop.final.reached::before { background: var(--red); }
+.stop:hover::before, .stop[aria-pressed="true"]::before { transform: scale(1.25); }
+.stop[aria-pressed="true"]::before { box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 25%, transparent); }
+
+.today { position: absolute; top: 4px; bottom: 0; width: 0; z-index: 2; pointer-events: none; transition: left .9s cubic-bezier(.2,.8,.2,1); }
+.today::after { content: ""; position: absolute; top: 22px; bottom: 0; left: -1px; width: 2px; background: var(--ink); border-radius: 2px; }
+.today span { position: absolute; top: 0; left: 0; transform: translateX(-50%); font-size: 11px; font-weight: 600; background: var(--ink); color: var(--bg); padding: 2px 7px; border-radius: 6px; white-space: nowrap; }
+.today.dim span { opacity: 0; }
+.today.edge-l span { transform: translateX(-4px); }
+.today.edge-r span { transform: translateX(calc(-100% + 4px)); }
+
+.cursor { position: absolute; top: 4px; bottom: 0; width: 0; z-index: 4; pointer-events: none; opacity: 0; transition: opacity .12s; }
+.cursor.on { opacity: 1; }
+.cursor::after { content: ""; position: absolute; top: 22px; bottom: 0; left: -1px; width: 2px; background: var(--primary); border-radius: 2px; }
+.cursor span { position: absolute; top: 0; left: 0; transform: translateX(-50%); font-size: 11px; font-weight: 600; background: var(--primary); color: var(--on-primary); padding: 2px 7px; border-radius: 6px; white-space: nowrap; }
+.cursor.edge-l span { transform: translateX(-4px); }
+.cursor.edge-r span { transform: translateX(calc(-100% + 4px)); }
+
+.labels { position: relative; height: 92px; margin-top: 8px; }
+.label { position: absolute; font-size: 13px; line-height: 1.35; white-space: nowrap; background: none; border: 0; padding: 2px 0; color: inherit; text-align: left; cursor: pointer; }
+.label b { display: block; font-weight: 600; font-size: 13px; }
+.label span { color: var(--ink-3); font-size: 12px; }
+.label:hover b { color: var(--primary); }
+.label.l0 { left: -10px; top: 0; }
+.label.l2 { right: -10px; top: 0; text-align: right; }
+.label.l1 { top: 0; transform: translateX(-50%); text-align: center; }
+.label.l1.row2 { top: 46px; }
+.label.l1.edge-r { transform: translateX(-100%); text-align: right; }
+.label.l1.edge-l { transform: none; }
+
+.legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--ink-2); margin-top: 4px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 14px; height: 8px; border-radius: 3px; display: block; }
+
+.detail { margin-top: 16px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--border); padding: 16px; }
+.detail-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.detail h3 { font-size: 15px; font-weight: 600; }
+.detail .when { font-size: 13px; color: var(--ink-2); }
+.detail p { margin: 6px 0 0; font-size: 14px; color: var(--ink-2); }
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+.fact { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; min-width: 0; }
+.fact b { display: block; font-size: 17px; font-weight: 700; letter-spacing: -.02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fact span { font-size: 12px; color: var(--ink-3); }
+.hint { font-size: 12px; color: var(--ink-3); margin-top: 10px; }
+
+/* ---------- Main grid ---------- */
+.grid { display: grid; gap: 16px; margin-top: 16px; grid-template-columns: minmax(0, 1fr); }
+.col-form { order: 2; }
+.col-main { order: 1; }
+@media (min-width: 900px) {
+  .grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: start; }
+  .col-form { order: 1; position: sticky; top: 76px; }
+  .col-main { order: 2; }
+}
+
+/* ---------- Form ---------- */
+.banner { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; background: var(--amber-soft); border-radius: 12px; padding: 12px 14px; margin-top: 16px; font-size: 14px; }
+.banner p { margin: 0; flex: 1 1 200px; }
+.banner b { color: var(--amber); }
+.banner[hidden], .alert[hidden] { display: none; }
+.alert { background: var(--red-soft); border-radius: 12px; padding: 12px 14px; margin-top: 16px; font-size: 14px; }
+
+.field { margin-top: 18px; }
+.field > label, .field > .label-text { display: block; font-weight: 500; font-size: 14px; margin-bottom: 6px; }
+.help { color: var(--ink-3); font-size: 13px; margin: 6px 0 0; }
+.optional { font-weight: 400; color: var(--ink-3); }
+input[type="date"], select {
+  display: block; width: 100%; min-width: 0; max-width: 100%; min-height: 44px; padding: 10px 12px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px; box-shadow: var(--shadow);
+  -webkit-appearance: none; appearance: none; transition: border-color .15s, box-shadow .15s;
+}
+input[type="date"]::-webkit-date-and-time-value { text-align: left; }
+input[type="date"]:hover, select:hover { border-color: var(--ink-3); }
+input[type="date"]:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 20%, transparent); }
+select {
+  padding-right: 36px; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a94a6' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center;
+}
+.rule-note { margin-top: 10px; padding: 12px 14px; background: var(--primary-soft); border-radius: 10px; font-size: 13px; color: var(--ink-2); }
+.rule-note p { margin: 0; }
+.rule-note p + p { margin-top: 6px; color: var(--ink); font-weight: 500; }
+
+.toggle-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 12px 0; cursor: pointer; font-size: 14px; }
+.toggle-row + .toggle-row { border-top: 1px solid var(--border); }
+.switch { position: relative; flex: none; width: 42px; height: 24px; }
+.switch input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.switch span { position: absolute; inset: 0; border-radius: 99px; background: var(--track); transition: background .2s; pointer-events: none; border: 1px solid var(--border); }
+.switch span::after { content: ""; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: transform .2s; }
+.switch input:checked + span { background: var(--primary); border-color: var(--primary); }
+.switch input:checked + span::after { transform: translateX(18px); }
+.switch input:focus-visible + span { outline: 2px solid var(--focus); outline-offset: 2px; }
+.group { margin-top: 18px; border: 1px solid var(--border); border-radius: 12px; padding: 0 14px; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 8px 14px; border-radius: 10px; cursor: pointer; border: 1px solid var(--border); background: var(--surface); color: var(--ink); font-weight: 500; font-size: 14px; box-shadow: var(--shadow); transition: background .15s, border-color .15s; }
+.btn:hover { border-color: var(--ink-3); }
+.btn.primary { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+.btn.primary:hover { background: var(--primary-hover); }
+.btn.subtle { box-shadow: none; background: transparent; border-color: transparent; color: var(--primary); padding: 6px 10px; min-height: 32px; }
+.btn.subtle:hover { background: var(--primary-soft); }
+.btn svg { width: 16px; height: 16px; }
+
+/* ---------- Milestones ---------- */
+.milestones { list-style: none; margin: 8px 0 0; padding: 0; position: relative; }
+.ms { position: relative; display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 2px 14px; padding: 14px 0; }
+.ms:not(:last-child)::after { content: ""; position: absolute; left: 15px; top: 48px; bottom: -14px; width: 2px; background: var(--border); }
+.ms.done:not(:last-child)::after { background: var(--primary); }
+.ms-icon { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-2); border: 2px solid var(--border); color: var(--ink-3); font-size: 13px; font-weight: 600; position: relative; z-index: 1; }
+.ms-icon svg { width: 16px; height: 16px; }
+.ms.done .ms-icon { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+.ms.now .ms-icon { background: var(--green-soft); border-color: var(--green); color: var(--green); }
+.ms h3 { font-size: 15px; font-weight: 600; padding-top: 5px; }
+.ms .ms-when { font-size: 13px; color: var(--ink-2); margin-top: 2px; }
+.ms .ms-when b { color: var(--ink); font-weight: 600; }
+.ms .ms-note { font-size: 12.5px; color: var(--ink-3); margin-top: 4px; }
+.ms-side { grid-column: 3; grid-row: 1 / span 2; text-align: right; padding-top: 3px; }
+.ms-side .days { display: block; font-size: 12px; color: var(--ink-3); margin-top: 4px; }
+
+.pill { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 99px; background: var(--surface-2); color: var(--ink-2); border: 1px solid var(--border); }
+.pill.ok { background: var(--green-soft); color: var(--green); border-color: transparent; }
+.pill.done { background: var(--primary-soft); color: var(--primary); border-color: transparent; }
+.pill.soon { background: var(--amber-soft); color: var(--amber); border-color: transparent; }
+
+/* ---------- Backup + footer ---------- */
+.backup-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+.backup-actions .btn { flex: 1 1 160px; }
+.backup-msg { font-size: 13px; margin-top: 10px; min-height: 1.4em; color: var(--ink-2); }
+.backup-msg.ok { color: var(--green); }
+.backup-msg.bad { color: var(--red); }
+
+footer { margin-top: 32px; border-top: 1px solid var(--border); padding: 24px 0 calc(env(safe-area-inset-bottom) + 40px); color: var(--ink-2); font-size: 13px; }
+footer .foot-brand { display: flex; align-items: center; gap: 8px; font-weight: 600; color: var(--ink); font-size: 14px; }
+footer ul { padding-left: 18px; margin: 10px 0; }
+footer li { margin: 4px 0; }
+footer a { color: var(--primary); }
+footer p { margin: 8px 0; max-width: 80ch; }
+
+@media (max-width: 420px) {
+  .card { padding: 18px; }
+  .hero-card { padding: 22px 18px; }
+  .ring { width: 148px; height: 148px; }
+  .ring-label strong { font-size: 34px; }
+  .facts { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .fact { padding: 8px 9px; }
+  .fact b { font-size: 15px; }
+  .ms { grid-template-columns: 32px minmax(0, 1fr); }
+  .ms-side { grid-column: 2; grid-row: auto; text-align: left; padding-top: 6px; display: flex; gap: 8px; align-items: center; }
+  .ms-side .days { margin-top: 0; }
+  .stat-value { font-size: 26px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <clipPath id="ukS"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
+    <clipPath id="ukT"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath>
+    <symbol id="ukFlag" viewBox="0 0 60 30">
+      <g clip-path="url(#ukS)">
+        <path d="M0,0 v30 h60 v-30 z" fill="#012169"/>
+        <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
+        <path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#ukT)" stroke="#C8102E" stroke-width="4"/>
+        <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/>
+        <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">
+      <svg class="flag" role="img" aria-label="Union Jack"><use href="#ukFlag"/></svg>
+      <span class="brand-name"><span class="long">Road to British Citizenship</span><span class="short">Road to Citizenship</span></span>
+    </div>
+    <div class="theme-toggle" role="group" aria-label="Colour theme">
+      <button type="button" data-theme-set="light" aria-pressed="false" title="Light">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <span class="sr-only">Light</span>
+      </button>
+      <button type="button" data-theme-set="system" aria-pressed="true" title="Match device">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
+        <span class="sr-only">Match device</span>
+      </button>
+      <button type="button" data-theme-set="dark" aria-pressed="false" title="Dark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+        <span class="sr-only">Dark</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="card hero-card">
+      <div>
+        <span class="kicker"><svg class="flag" aria-hidden="true"><use href="#ukFlag"/></svg> Visa → Settlement → Citizenship</span>
+        <h1 id="headline">You're <span class="accent">0%</span> of the way there</h1>
+        <p class="lead" id="lead">Add your start date to see your progress.</p>
+        <div class="save-status" id="saveStatus" data-kind="ok" role="status" aria-live="polite">Saved on this device</div>
+      </div>
+      <div class="ring" aria-hidden="true">
+        <svg viewBox="0 0 120 120">
+          <defs>
+            <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" style="stop-color:var(--primary)"/>
+              <stop offset="1" style="stop-color:var(--red)"/>
+            </linearGradient>
+          </defs>
+          <circle class="bg" cx="60" cy="60" r="52" fill="none" stroke-width="10"/>
+          <circle class="fg" id="ringFg" cx="60" cy="60" r="52" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="326.73" stroke-dashoffset="326.73"/>
+        </svg>
+        <div class="ring-label"><strong id="ringPct">0<small>%</small></strong><span>complete</span></div>
+      </div>
+    </div>
+
+    <div class="stats" id="stats"></div>
+  </section>
+
+  <section class="card chart-card" aria-labelledby="chartTitle">
+    <div class="card-head">
+      <div>
+        <h2 id="chartTitle">Your journey</h2>
+        <p class="sub">Hover or drag along the line to see any date. Tap a milestone for details.</p>
+      </div>
+      <button type="button" class="btn subtle reset-btn" id="resetChart" hidden>Back to today</button>
+    </div>
+
+    <div class="chart" id="chart">
+      <div class="chart-area" id="chartArea" tabindex="0" role="slider" aria-label="Explore your timeline by date" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="track" id="track">
+          <div class="phase p1" id="phase1"></div>
+          <div class="phase p2" id="phase2"></div>
+          <div id="ticks"></div>
+          <div class="fill" id="fill"></div>
+        </div>
+        <div class="today" id="todayMark"><span>Today</span></div>
+        <div class="cursor" id="cursor"><span id="cursorLabel"></span></div>
+        <button type="button" class="stop" id="stop0" data-stop="0" aria-label="Arrived" aria-pressed="false"></button>
+        <button type="button" class="stop" id="stop1" data-stop="1" aria-label="Settlement (ILR)" aria-pressed="false"></button>
+        <button type="button" class="stop final" id="stop2" data-stop="2" aria-label="Citizenship" aria-pressed="false"></button>
+      </div>
+      <div class="labels">
+        <button type="button" class="label l0" data-stop="0"><b>Arrived</b><span id="lbl0">–</span></button>
+        <button type="button" class="label l1" data-stop="1" id="lbl1wrap"><b>Settlement (ILR)</b><span id="lbl1">–</span></button>
+        <button type="button" class="label l2" data-stop="2"><b>Citizenship</b><span id="lbl2">–</span></button>
+      </div>
+      <div class="legend" aria-hidden="true">
+        <span><i style="background:var(--phase-1)"></i>Residence for settlement</span>
+        <span><i style="background:var(--phase-2)"></i>Settled, before citizenship</span>
+        <span><i style="background:var(--primary)"></i>Completed</span>
+      </div>
+    </div>
+
+    <div class="detail" id="detail" aria-live="polite"></div>
+  </section>
+
+  <div class="grid">
+    <div class="col-form stack">
+      <section class="card" aria-labelledby="detailsTitle">
+        <h2 id="detailsTitle">Your details</h2>
+        <p class="sub">Enter these once. They're saved on this device and everything updates from today's date.</p>
+
+        <div class="banner" id="exampleBanner" hidden>
+          <p><b>Example data.</b> These are sample dates so you can see how it works. Replace them with yours and they'll be saved.</p>
+          <button type="button" class="btn" id="clearExample">Start blank</button>
+        </div>
+        <div class="alert" id="storageAlert" role="alert" hidden></div>
+
+        <form id="form" novalidate onsubmit="return false">
+          <div class="field">
+            <label for="start">Qualifying residence start date</label>
+            <input type="date" id="start" name="start" aria-describedby="startHelp">
+            <p class="help" id="startHelp">Usually the date your visa was issued if you were already in the UK, or the date you entered the UK on it.</p>
+          </div>
+
+          <div class="field">
+            <label for="period">Settlement period to plan by</label>
+            <select id="period" name="period" aria-describedby="ruleNote">
+              <option value="5c">5 years · current rules (in force today)</option>
+              <option value="10">10 years · Earned Settlement default</option>
+              <option value="5e">5 years · Earned Settlement, earning over £50,271</option>
+              <option value="3">3 years · Earned Settlement, earning over £125,141</option>
+            </select>
+            <div class="rule-note" id="ruleNote" aria-live="polite"></div>
+          </div>
+
+          <div class="field">
+            <label for="ilrGranted">Date ILR was granted <span class="optional">(optional)</span></label>
+            <input type="date" id="ilrGranted" name="ilrGranted" aria-describedby="ilrHelp">
+            <p class="help" id="ilrHelp">Leave blank until you have it.</p>
+          </div>
+
+          <div class="group">
+            <label class="toggle-row" for="married"><span>I'm married to, or the civil partner of, a British citizen</span><span class="switch"><input type="checkbox" id="married" role="switch"><span></span></span></label>
+            <label class="toggle-row" for="lifeTest"><span>Passed the Life in the UK test</span><span class="switch"><input type="checkbox" id="lifeTest" role="switch"><span></span></span></label>
+            <label class="toggle-row" for="english"><span>Met the English language requirement</span><span class="switch"><input type="checkbox" id="english" role="switch"><span></span></span></label>
+          </div>
+        </form>
+      </section>
+
+      <section class="card" aria-labelledby="backupTitle">
+        <h2 id="backupTitle">Backup</h2>
+        <p class="sub">Your data lives on this device only, so save a backup before switching phones or clearing your browser.</p>
+        <div class="backup-actions">
+          <button type="button" class="btn primary" id="saveBackup">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+            Save backup file
+          </button>
+          <button type="button" class="btn" id="restoreBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9M7 14l5-5 5 5M5 3h14"/></svg>
+            Restore from file
+          </button>
+          <input type="file" id="restoreFile" accept=".json,application/json" class="sr-only" tabindex="-1" aria-hidden="true">
+        </div>
+        <div class="backup-msg" id="backupMsg" role="status" aria-live="polite"></div>
+      </section>
+    </div>
+
+    <div class="col-main">
+      <section class="card" aria-labelledby="msTitle">
+        <h2 id="msTitle">Milestones</h2>
+        <ol class="milestones" id="milestones"></ol>
+      </section>
+    </div>
+  </div>
+
+  <footer>
+    <div class="foot-brand"><svg class="flag" style="width:24px;height:12px" aria-hidden="true"><use href="#ukFlag"/></svg> Please read</div>
+    <p>This is a planning aid, not legal advice. It shows estimates based on the dates you enter.</p>
+    <ul>
+      <li><b>Time outside the UK:</b> for settlement, usually no more than 180 days in any 12 months. For citizenship, no more than 450 days in the 5 years before applying (270 in 3 years if married to a British citizen) and no more than 90 days in the last 12 months. The Home Office can use discretion on small overages.</li>
+      <li><b>Earned Settlement</b> was confirmed on 2 November 2026. Rules are expected from December 2026, phased in through 2027. Applications are decided under the rules in force on the <em>decision date</em>.</li>
+      <li>The English level for settlement rises from B1 to B2 for applications made from 26 March 2027.</li>
+    </ul>
+    <p>Always check <a href="https://www.gov.uk/browse/visas-immigration/settle-in-the-uk" target="_blank" rel="noopener">GOV.UK</a> or a regulated immigration adviser before applying. Your details never leave this device.</p>
+  </footer>
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ================= Date helpers (whole UTC days) ================= */
+  var DAY = 86400000;
+  function parseDay(s) {
+    if (typeof s !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(s)) return null;
+    var p = s.split('-').map(Number);
+    var t = Date.UTC(p[0], p[1] - 1, p[2]);
+    var d = new Date(t);
+    if (d.getUTCFullYear() !== p[0] || d.getUTCMonth() !== p[1] - 1 || d.getUTCDate() !== p[2]) return null;
+    return Math.round(t / DAY);
+  }
+  function parts(n) { var d = new Date(n * DAY); return { y: d.getUTCFullYear(), m: d.getUTCMonth(), d: d.getUTCDate() }; }
+  function daysInMonth(y, m) { return new Date(Date.UTC(y, m + 1, 0)).getUTCDate(); }
+  function addMonths(n, months) {
+    var p = parts(n);
+    var total = p.m + months;
+    var y = p.y + Math.floor(total / 12);
+    var m = ((total % 12) + 12) % 12;
+    return Math.round(Date.UTC(y, m, Math.min(p.d, daysInMonth(y, m))) / DAY);
+  }
+  function addYears(n, years) { return addMonths(n, years * 12); }
+  function todayDay() { var t = new Date(); return Math.round(Date.UTC(t.getFullYear(), t.getMonth(), t.getDate()) / DAY); }
+  function toISO(n) { return new Date(n * DAY).toISOString().slice(0, 10); }
+  var fmtter = new Intl.DateTimeFormat('en-GB', { timeZone: 'UTC', day: 'numeric', month: 'short', year: 'numeric' });
+  function fmt(n) { return n == null ? '–' : fmtter.format(new Date(n * DAY)).replace('Sept', 'Sep'); }
+  function plural(n, w) { return n.toLocaleString('en-GB') + ' ' + w + (n === 1 ? '' : 's'); }
+  function nf(n) { return n.toLocaleString('en-GB'); }
+
+  // "2 yrs 3 mo" / "5 mo" / "12 days"
+  function span(from, to) {
+    var a = parts(from), b = parts(to);
+    var months = (b.y - a.y) * 12 + (b.m - a.m) - (b.d < a.d ? 1 : 0);
+    if (months < 1) return plural(to - from, 'day');
+    var y = Math.floor(months / 12), m = months % 12, out = '';
+    if (y) out += y + (y === 1 ? ' yr' : ' yrs');
+    if (m) out += (y ? ' ' : '') + m + ' mo';
+    return out;
+  }
+  function relative(day, today) {
+    if (day === today) return 'Today';
+    return day > today ? 'in ' + plural(day - today, 'day') : plural(today - day, 'day') + ' ago';
+  }
+
+  /* ================= Rules ================= */
+  var PERIODS = { '5c': 5, '10': 10, '5e': 5, '3': 3 };
+  var RULE_TEXT = {
+    '5c': "The 5-year route is what's in force today. Earned Settlement is due to change this from December 2026, and applications are decided under the rules in force on the decision date, so compare with the 10-year view.",
+    '10': 'The new default under Earned Settlement, which requires earnings of at least £12,571 in 5 of the 7 years. Rules are expected from December 2026, phased in through 2027.',
+    '5e': 'For people earning over £50,271 in 3 of the last 5 years (some public-service workers also qualify).',
+    '3': 'For people earning over £125,141 in 3 of the last 4 years.'
+  };
+  var SPOUSE_NOTE = 'Partners of British citizens are expected to keep a 5-year route.';
+
+  /* ================= Theme ================= */
+  var THEME_KEY = 'road-to-citizenship.theme';
+  var themeBtns = document.querySelectorAll('[data-theme-set]');
+  var mql = window.matchMedia('(prefers-color-scheme: dark)');
+  function currentTheme() { return document.documentElement.getAttribute('data-theme') || 'system'; }
+  function applyThemeColor() {
+    var t = currentTheme();
+    var dark = t === 'dark' || (t === 'system' && mql.matches);
+    document.getElementById('themeColor').setAttribute('content', dark ? '#000000' : '#f6f7f9');
+  }
+  function setTheme(t) {
+    if (t === 'system') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', t);
+    try { if (t === 'system') localStorage.removeItem(THEME_KEY); else localStorage.setItem(THEME_KEY, t); } catch (e) {}
+    themeBtns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-theme-set') === t)); });
+    applyThemeColor();
+  }
+  themeBtns.forEach(function (b) { b.addEventListener('click', function () { setTheme(b.getAttribute('data-theme-set')); }); });
+  if (mql.addEventListener) mql.addEventListener('change', applyThemeColor);
+  setTheme(currentTheme());
+
+  /* ================= State + storage ================= */
+  var KEY = 'road-to-citizenship.v1';
+  var state = null, exampleMode = false, storageOK = true;
+
+  function blankState() { return { version: 2, start: '', period: '5c', married: false, ilrGranted: '', lifeTest: false, english: false }; }
+  function exampleState() { return { version: 2, start: '2023-09-15', period: '5c', married: false, ilrGranted: '', lifeTest: false, english: true }; }
+
+  function clean(raw) {
+    if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
+    var dateOrBlank = function (v) { v = v == null ? '' : v; return (typeof v === 'string' && (v === '' || parseDay(v) != null)) ? v : null; };
+    var s = blankState();
+    var start = dateOrBlank(raw.start), ilr = dateOrBlank(raw.ilrGranted);
+    if (start === null || ilr === null) return null;
+    s.start = start; s.ilrGranted = ilr;
+    s.period = Object.prototype.hasOwnProperty.call(PERIODS, raw.period) ? raw.period : '5c';
+    s.married = raw.married === true;
+    s.lifeTest = raw.lifeTest === true;
+    s.english = raw.english === true;
+    return s;
+  }
+
+  function load() {
+    try {
+      var txt = localStorage.getItem(KEY);
+      return txt ? clean(JSON.parse(txt)) : null;
+    } catch (e) { storageOK = false; return null; }
+  }
+  function setStatus(kind, text) { el.saveStatus.dataset.kind = kind; el.saveStatus.textContent = text; }
+  function save() {
+    if (exampleMode) { setStatus('example', 'Example data · not saved yet'); return; }
+    try {
+      state.savedAt = new Date().toISOString();
+      localStorage.setItem(KEY, JSON.stringify(state));
+      storageOK = true;
+      el.storageAlert.hidden = true;
+      setStatus('ok', 'Saved on this device');
+    } catch (e) {
+      storageOK = false;
+      setStatus('error', 'Not saved · storage is blocked');
+      el.storageAlert.hidden = false;
+      el.storageAlert.textContent = "Your browser isn't letting this page save data (this can happen in private browsing or if site data is blocked). Your changes will be lost when you close it. Turn off private browsing or allow site data, or use \"Save backup file\".";
+    }
+  }
+  function leaveExample() { if (exampleMode) { exampleMode = false; el.exampleBanner.hidden = true; } }
+
+  /* ================= Calculations ================= */
+  function compute() {
+    var today = todayDay();
+    var start = parseDay(state.start);
+    if (start == null) return { today: today, ready: false };
+    var years = PERIODS[state.period];
+    var ilrEligible = addYears(start, years);
+    var granted = parseDay(state.ilrGranted);
+    var ilrDate = granted != null ? granted : ilrEligible;
+    var cit = state.married
+      ? Math.max(ilrDate, addYears(start, 3))
+      : Math.max(addYears(ilrDate, 1), addYears(start, 5));
+    return { today: today, ready: true, start: start, years: years, ilrEligible: ilrEligible, granted: granted, ilrDate: ilrDate, cit: cit, pct: pctAt(today, start, cit) };
+  }
+  function pctAt(day, start, cit) { return cit > start ? Math.max(0, Math.min(100, (day - start) / (cit - start) * 100)) : 100; }
+
+  /* ================= Elements ================= */
+  var el = {};
+  ['headline', 'lead', 'saveStatus', 'ringFg', 'ringPct', 'stats', 'chartArea', 'track', 'phase1', 'phase2', 'ticks', 'fill', 'todayMark', 'cursor', 'cursorLabel',
+   'stop0', 'stop1', 'stop2', 'lbl0', 'lbl1', 'lbl2', 'lbl1wrap', 'detail', 'resetChart',
+   'exampleBanner', 'clearExample', 'storageAlert', 'start', 'period', 'ruleNote', 'married', 'ilrGranted', 'lifeTest', 'english',
+   'milestones', 'saveBackup', 'restoreBtn', 'restoreFile', 'backupMsg'
+  ].forEach(function (id) { el[id] = document.getElementById(id); });
+
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  var ICON_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>';
+
+  /* ================= Rendering ================= */
+  var C = null;            // latest computed values
+  var selected = null;     // selected stop index (0..2) or null
+  var scrubDay = null;     // date being explored on the chart, or null
+
+  function fillForm() {
+    el.start.value = state.start;
+    el.period.value = state.period;
+    el.married.checked = state.married;
+    el.ilrGranted.value = state.ilrGranted;
+    el.lifeTest.checked = state.lifeTest;
+    el.english.checked = state.english;
+  }
+
+  function render() {
+    C = compute();
+    var c = C;
+    var html = '<p>' + esc(RULE_TEXT[state.period]) + '</p>';
+    if (state.married && state.period !== '5c') html += '<p>' + esc(SPOUSE_NOTE) + '</p>';
+    el.ruleNote.innerHTML = html;
+
+    // Hero
+    var p = c.ready ? Math.floor(c.pct) : 0;
+    el.ringPct.innerHTML = (c.ready ? p : '–') + '<small>%</small>';
+    el.ringFg.style.strokeDashoffset = String(326.73 * (1 - (c.ready ? c.pct : 0) / 100));
+    if (!c.ready) {
+      el.headline.innerHTML = 'Your road to <span class="accent">British citizenship</span>';
+      el.lead.textContent = 'Add your qualifying residence start date below to see your progress.';
+    } else if (c.today >= c.cit) {
+      el.headline.innerHTML = 'You\'re <span class="accent">ready to apply</span> for citizenship';
+      el.lead.innerHTML = 'You became eligible on <b>' + fmt(c.cit) + '</b>. Check the requirements on GOV.UK before you apply.';
+    } else {
+      el.headline.innerHTML = 'You\'re <span class="accent">' + p + '%</span> of the way there';
+      el.lead.innerHTML = '<b>' + plural(c.cit - c.today, 'day') + '</b> to go until you can apply for British citizenship on <b>' + fmt(c.cit) + '</b>.';
+    }
+
+    renderStats(c);
+    renderChart(c);
+    renderMilestones(c);
+  }
+
+  function statHTML(cls, dot, label, value, unit, foot) {
+    return '<div class="stat ' + cls + '"><div class="stat-label"><i style="background:' + dot + '"></i>' + esc(label) + '</div>' +
+      '<div class="stat-value num">' + value + (unit ? '<small>' + unit + '</small>' : '') + '</div>' +
+      '<div class="stat-foot">' + foot + '</div></div>';
+  }
+  function renderStats(c) {
+    if (!c.ready) { el.stats.innerHTML = ''; return; }
+    var out = '';
+    // Citizenship
+    if (c.today >= c.cit) out += statHTML('feature done', 'var(--red)', 'Citizenship', 'Eligible now', '', 'Since ' + fmt(c.cit));
+    else out += statHTML('feature', 'var(--red)', 'Days to citizenship', nf(c.cit - c.today), 'days', span(c.today, c.cit) + ' · ' + fmt(c.cit));
+    // Settlement
+    if (c.granted != null) out += statHTML('done', 'var(--primary)', 'Settlement (ILR)', 'Granted', '', fmt(c.granted));
+    else if (c.today >= c.ilrEligible) out += statHTML('done', 'var(--primary)', 'Settlement (ILR)', 'Eligible now', '', 'Since ' + fmt(c.ilrEligible));
+    else out += statHTML('', 'var(--primary)', 'Days to settlement', nf(c.ilrEligible - c.today), 'days', span(c.today, c.ilrEligible) + ' · ' + fmt(c.ilrEligible));
+    // Time in UK
+    var inUK = Math.max(0, c.today - c.start);
+    out += statHTML('', 'var(--green)', 'Days on your route', nf(inUK), 'days', c.today >= c.start ? 'Since ' + fmt(c.start) : 'Starts ' + fmt(c.start));
+    el.stats.innerHTML = out;
+  }
+
+  /* ---------- Chart ---------- */
+  function renderChart(c) {
+    var ready = c.ready;
+    var ilrPct = ready ? pctAt(c.ilrDate, c.start, c.cit) : 60;
+    var pct = ready ? c.pct : 0;
+    el.phase1.style.width = ilrPct + '%';
+    el.phase2.style.width = (100 - ilrPct) + '%';
+    el.fill.style.width = pct + '%';
+    el.todayMark.style.left = pct + '%';
+    el.todayMark.classList.toggle('edge-l', pct < 6);
+    el.todayMark.classList.toggle('edge-r', pct > 94);
+    el.todayMark.style.display = ready ? '' : 'none';
+    el.stop0.style.left = '0%';
+    el.stop1.style.left = ilrPct + '%';
+    el.stop2.style.left = '100%';
+    el.stop0.classList.toggle('reached', ready && c.today >= c.start);
+    el.stop1.classList.toggle('reached', ready && (c.granted != null || c.today >= c.ilrDate));
+    el.stop2.classList.toggle('reached', ready && c.today >= c.cit);
+
+    el.lbl0.textContent = ready ? fmt(c.start) : '–';
+    el.lbl1.textContent = ready ? fmt(c.ilrDate) : '–';
+    el.lbl2.textContent = ready ? fmt(c.cit) : '–';
+    el.lbl1wrap.style.left = ilrPct + '%';
+    var crowded = ilrPct < 30 || ilrPct > 70;
+    el.lbl1wrap.classList.toggle('row2', crowded);
+    el.lbl1wrap.classList.toggle('edge-r', ilrPct > 80);
+    el.lbl1wrap.classList.toggle('edge-l', ilrPct < 20);
+
+    // Year ticks (1 January of each year)
+    var ticks = '';
+    if (ready) {
+      var y0 = parts(c.start).y + 1, y1 = parts(c.cit).y;
+      for (var y = y0; y <= y1; y++) {
+        var d = Math.round(Date.UTC(y, 0, 1) / DAY);
+        if (d > c.start && d < c.cit) ticks += '<div class="tick" style="left:' + pctAt(d, c.start, c.cit) + '%"></div>';
+      }
+    }
+    el.ticks.innerHTML = ticks;
+    el.chartArea.setAttribute('aria-valuenow', String(Math.round(pct)));
+    renderDetail();
+  }
+
+  function phaseText(day, c) {
+    if (day < c.start) return 'Before your qualifying residence starts.';
+    if (day < c.ilrDate) return 'Building residence for settlement. ' + plural(c.ilrDate - day, 'day') + ' until ILR ' + (c.granted != null ? 'was granted' : 'eligibility') + '.';
+    if (day < c.cit) return (c.granted != null ? 'Settled (ILR granted). ' : 'Eligible for settlement. ') + plural(c.cit - day, 'day') + ' until you can apply for citizenship.';
+    return 'Eligible to apply for British citizenship.';
+  }
+
+  function detailFor(day, title) {
+    var c = C;
+    return '<div class="detail-top"><h3>' + esc(title) + '</h3><span class="when num">' + fmt(day) + '</span></div>' +
+      '<p>' + esc(phaseText(day, c)) + '</p>' +
+      '<div class="facts">' +
+        '<div class="fact"><b class="num">' + Math.floor(pctAt(day, c.start, c.cit)) + '%</b><span>progress</span></div>' +
+        '<div class="fact"><b class="num">' + esc(day === c.today ? 'Today' : (day > c.today ? nf(day - c.today) : '−' + nf(c.today - day))) + '</b><span>' + (day === c.today ? 'that\'s now' : day > c.today ? 'days from now' : 'days ago') + '</span></div>' +
+        '<div class="fact"><b class="num">' + (day < c.cit ? nf(c.cit - day) : '0') + '</b><span>days to citizenship</span></div>' +
+      '</div>';
+  }
+
+  var STOP_NAMES = ['Arrived', 'Settlement (ILR)', 'Citizenship'];
+  function renderDetail() {
+    var c = C;
+    [el.stop0, el.stop1, el.stop2].forEach(function (b, i) { b.setAttribute('aria-pressed', String(selected === i && scrubDay == null)); });
+    el.resetChart.hidden = selected == null && scrubDay == null;
+    if (!c.ready) { el.detail.innerHTML = '<p style="margin:0">Add your start date to explore your timeline.</p>'; return; }
+
+    var day, title;
+    if (scrubDay != null) { day = scrubDay; title = scrubDay === c.today ? 'Today' : relative(scrubDay, c.today).replace(/^in /, 'In '); }
+    else if (selected != null) { day = [c.start, c.ilrDate, c.cit][selected]; title = STOP_NAMES[selected]; }
+    else { day = c.today; title = 'Today'; }
+    el.detail.innerHTML = detailFor(day, title) +
+      (scrubDay == null && selected == null ? '<div class="hint">Tip: drag along the timeline, or use the arrow keys when it\'s focused.</div>' : '');
+
+    // cursor
+    if (scrubDay != null) {
+      var p = pctAt(scrubDay, c.start, c.cit);
+      el.cursor.style.left = p + '%';
+      el.cursor.classList.add('on');
+      el.cursor.classList.toggle('edge-l', p < 8);
+      el.cursor.classList.toggle('edge-r', p > 92);
+      el.cursorLabel.textContent = fmt(scrubDay);
+      el.todayMark.classList.toggle('dim', Math.abs(p - c.pct) < 16);
+      el.chartArea.setAttribute('aria-valuetext', fmt(scrubDay) + ', ' + Math.floor(p) + '% progress');
+    } else {
+      el.cursor.classList.remove('on');
+      el.todayMark.classList.remove('dim');
+      el.chartArea.setAttribute('aria-valuetext', 'Today, ' + Math.floor(c.pct) + '% progress');
+    }
+  }
+
+  function dayFromX(clientX) {
+    var r = el.track.getBoundingClientRect();
+    var f = Math.max(0, Math.min(1, (clientX - r.left) / r.width));
+    return Math.round(C.start + f * (C.cit - C.start));
+  }
+  function setScrub(day) { if (!C || !C.ready) return; scrubDay = day; renderDetail(); }
+
+  var dragging = false;
+  el.chartArea.addEventListener('pointerdown', function (e) {
+    if (e.target.closest('.stop') || !C || !C.ready) return;
+    dragging = true;
+    selected = null;
+    try { el.chartArea.setPointerCapture(e.pointerId); } catch (x) {}
+    setScrub(dayFromX(e.clientX));
+  });
+  el.chartArea.addEventListener('pointermove', function (e) {
+    if (!C || !C.ready) return;
+    if (dragging || e.pointerType === 'mouse') {
+      if (e.target.closest('.stop') && !dragging) return;
+      setScrub(dayFromX(e.clientX));
+    }
+  });
+  function endDrag() { dragging = false; }
+  el.chartArea.addEventListener('pointerup', endDrag);
+  el.chartArea.addEventListener('pointercancel', function () { dragging = false; });
+  el.chartArea.addEventListener('pointerleave', function (e) {
+    if (e.pointerType === 'mouse' && !dragging) { scrubDay = null; renderDetail(); }
+  });
+  el.chartArea.addEventListener('keydown', function (e) {
+    if (!C || !C.ready) return;
+    var base = scrubDay != null ? scrubDay : (selected != null ? [C.start, C.ilrDate, C.cit][selected] : C.today);
+    var next = null;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp') next = addMonths(base, 1);
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') next = addMonths(base, -1);
+    else if (e.key === 'PageUp') next = addYears(base, 1);
+    else if (e.key === 'PageDown') next = addYears(base, -1);
+    else if (e.key === 'Home') next = C.start;
+    else if (e.key === 'End') next = C.cit;
+    else if (e.key === 'Escape') { scrubDay = null; selected = null; renderDetail(); return; }
+    if (next == null) return;
+    e.preventDefault();
+    selected = null;
+    setScrub(Math.max(C.start, Math.min(C.cit, next)));
+  });
+  document.getElementById('chart').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-stop]');
+    if (!b) return;
+    selected = Number(b.getAttribute('data-stop'));
+    scrubDay = null;
+    renderDetail();
+  });
+  el.resetChart.addEventListener('click', function () { selected = null; scrubDay = null; renderDetail(); });
+
+  /* ---------- Milestones ---------- */
+  function pill(cls, text) { return '<span class="pill ' + cls + '">' + esc(text) + '</span>'; }
+  function renderMilestones(c) {
+    var items = [];
+    var started = c.ready && c.today >= c.start;
+    items.push({ done: started, title: 'Qualifying residence started',
+      when: c.ready ? '<b>' + fmt(c.start) + '</b>' : 'Add your start date',
+      side: c.ready ? (started ? pill('done', 'Done') : pill('', 'In ' + span(c.today, c.start))) : pill('', 'To do'),
+      days: c.ready && !started ? plural(c.start - c.today, 'day') : '' });
+
+    var ilr = { title: 'Apply for settlement (ILR)' };
+    if (!c.ready) { ilr.when = 'Add your start date'; ilr.side = pill('', 'To do'); }
+    else if (c.granted != null) { ilr.done = true; ilr.when = 'Granted <b>' + fmt(c.granted) + '</b>'; ilr.side = pill('done', 'Done'); }
+    else {
+      ilr.when = 'Eligible from <b>' + fmt(c.ilrEligible) + '</b> · you can usually apply up to 28 days early';
+      ilr.note = 'Based on the ' + c.years + '-year period you chose.';
+      if (c.today >= c.ilrEligible) { ilr.now = true; ilr.side = pill('ok', 'Eligible now'); }
+      else if (c.today >= c.ilrEligible - 28) { ilr.now = true; ilr.side = pill('soon', 'Can apply early'); ilr.days = plural(c.ilrEligible - c.today, 'day') + ' left'; }
+      else { ilr.side = pill('', 'In ' + span(c.today, c.ilrEligible)); ilr.days = plural(c.ilrEligible - c.today, 'day') + ' left'; }
+    }
+    items.push(ilr);
+
+    items.push({ done: state.lifeTest, title: 'Life in the UK test', when: state.lifeTest ? 'Passed' : 'Not passed yet',
+      note: 'Needed for both ILR and citizenship. You only need to pass it once.',
+      side: state.lifeTest ? pill('done', 'Done') : pill('', 'To do') });
+
+    items.push({ done: state.english, title: 'English language requirement', when: state.english ? 'Met' : 'Not met yet',
+      note: 'For settlement, the level rises from B1 to B2 for applications made from 26 March 2027 (rules laid in March 2026). Check which level applies to you.',
+      side: state.english ? pill('done', 'Done') : pill('', 'To do') });
+
+    var cit = { title: state.married ? 'Apply for citizenship (spouse route)' : 'Apply for citizenship',
+      note: state.married ? 'Spouse route: no 12-month wait after ILR, and at least 3 years in the UK.' : 'Usually 12 months after ILR, and at least 5 years in the UK.' };
+    if (!c.ready) { cit.when = 'Add your start date'; cit.side = pill('', 'To do'); }
+    else {
+      cit.when = 'Eligible from <b>' + fmt(c.cit) + '</b>';
+      if (c.today >= c.cit) { cit.now = true; cit.side = pill('ok', 'Eligible now'); }
+      else { cit.side = pill('', 'In ' + span(c.today, c.cit)); cit.days = plural(c.cit - c.today, 'day') + ' left'; }
+    }
+    items.push(cit);
+
+    el.milestones.innerHTML = items.map(function (it, i) {
+      return '<li class="ms' + (it.done ? ' done' : '') + (it.now ? ' now' : '') + '">' +
+        '<span class="ms-icon" aria-hidden="true">' + (it.done ? ICON_CHECK : (i + 1)) + '</span>' +
+        '<div><h3>' + esc(it.title) + '</h3><div class="ms-when num">' + it.when + '</div>' +
+        (it.note ? '<div class="ms-note">' + esc(it.note) + '</div>' : '') + '</div>' +
+        '<div class="ms-side">' + it.side + (it.days ? '<span class="days num">' + esc(it.days) + '</span>' : '') + '</div></li>';
+    }).join('');
+  }
+
+  /* ================= Form events ================= */
+  function changed() { leaveExample(); save(); render(); }
+  function bindDate(input, key) {
+    function h() { if (input.value === '' || parseDay(input.value) != null) { state[key] = input.value; changed(); } }
+    input.addEventListener('change', h);
+    input.addEventListener('input', h);
+  }
+  bindDate(el.start, 'start');
+  bindDate(el.ilrGranted, 'ilrGranted');
+  el.period.addEventListener('change', function () { state.period = el.period.value; changed(); });
+  ['married', 'lifeTest', 'english'].forEach(function (k) {
+    el[k].addEventListener('change', function () { state[k] = el[k].checked; changed(); });
+  });
+  el.clearExample.addEventListener('click', function () {
+    state = blankState(); leaveExample(); fillForm(); save(); render(); el.start.focus();
+  });
+
+  /* ================= Backup ================= */
+  function backupMsg(kind, text) { el.backupMsg.className = 'backup-msg ' + kind; el.backupMsg.textContent = text; }
+  el.saveBackup.addEventListener('click', function () {
+    try {
+      var data = Object.assign({ app: 'road-to-british-citizenship', exportedAt: new Date().toISOString() }, state);
+      var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url; a.download = 'citizenship-backup-' + toISO(todayDay()) + '.json';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+      backupMsg('ok', 'Backup saved. Keep it somewhere safe, such as your email or cloud storage.');
+    } catch (e) { backupMsg('bad', "Couldn't create the backup file on this browser."); }
+  });
+  el.restoreBtn.addEventListener('click', function () { el.restoreFile.value = ''; el.restoreFile.click(); });
+  el.restoreFile.addEventListener('change', function () {
+    var file = el.restoreFile.files && el.restoreFile.files[0];
+    if (!file) return;
+    if (file.size > 1024 * 1024) { backupMsg('bad', 'That file is too large to be a backup from this app.'); return; }
+    var reader = new FileReader();
+    reader.onload = function () {
+      var parsed;
+      try { parsed = JSON.parse(String(reader.result)); } catch (e) { backupMsg('bad', "That file isn't a valid backup (it couldn't be read)."); return; }
+      var s = clean(parsed);
+      if (!s || parsed.start == null) { backupMsg('bad', "That file isn't a backup from this app, so nothing was changed."); return; }
+      if (!window.confirm('Replace the details on this device with the ones in the backup file?')) { backupMsg('', 'Restore cancelled. Nothing was changed.'); return; }
+      state = s; leaveExample(); fillForm(); save(); render();
+      backupMsg('ok', 'Your details were restored from the backup.');
+    };
+    reader.onerror = function () { backupMsg('bad', "Couldn't read that file."); };
+    reader.readAsText(file);
+  });
+
+  /* ================= Start-up ================= */
+  var saved = load();
+  if (saved) state = saved;
+  else { state = exampleState(); exampleMode = true; el.exampleBanner.hidden = false; }
+  fillForm();
+  render();
+  if (!storageOK) save();
+  else if (exampleMode) setStatus('example', 'Example data · not saved yet');
+
+  var lastDay = todayDay();
+  function refreshIfNewDay() { var t = todayDay(); if (t !== lastDay) { lastDay = t; render(); } }
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) refreshIfNewDay(); });
+  setInterval(refreshIfNewDay, 60 * 1000);
+
+  if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+    window.addEventListener('load', function () { navigator.serviceWorker.register('./sw.js').catch(function () {}); });
+  }
+})();
+</script>
+</body>
+</html>

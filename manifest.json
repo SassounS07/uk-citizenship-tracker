@@ -1,0 +1,16 @@
+{
+  "name": "Road to British Citizenship",
+  "short_name": "Citizenship",
+  "description": "Track your progress from UK visa to settlement (ILR) and British citizenship.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f3f5f3",
+  "theme_color": "#7a1f3d",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
